@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage 2.0 for Alex</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="assets/css/mainDarkMode.css">
+    <link rel="stylesheet" href="assets/css/diaryDarkMode.css">
+    <link rel="stylesheet" href="assets/css/otherButtons.css">
+    <link rel="stylesheet" href="assets/css/timer.css">
+    <link rel="stylesheet" href="assets/css/youtubeVideoList.css">
+    
+    <link rel="stylesheet" href="assets/font/roboto.css">
+    <script src="assets/font/d40a0f0b1f.js"></script>
+
+
+    <script src="js/miscFunctions.js"></script>
+
+    <script src="js/consts.js"></script>
+    <script defer src="js/vars.js"></script>
+
+    <script src="./js/classes/HTTPRequest.js"></script>
+
+    <script src="./js/classes/UI.js"></script>
+    <script src="./js/classes/UI_diary.js"></script>
+    <script src="./js/classes/UI_MainPage.js"></script>
+    <script src="./js/classes/UI_SmallPopUp.js"></script>
+    <script src="./js/classes/UI_YoutubeVideoList.js"></script>
+    <script src="./js/classes/Timer.js"></script>
+</head>
+<body>
+    <div id="mainPageContainer">
+        
+    </div>
+
+    <div id="diaryContainer" class="">
+        <div id="cJBContainer"><div id="closeDiaryButton" onclick="vars.UI.diary.class.showSwitch()"><i class="fa-solid fa-rectangle-xmark"></i></div></div>
+        <div id="diaryHeading">DIARY</div>
+        <div id="diaryView"></div>
+    </div>
+
+    <div id="editDiaryEntry">
+        <div id="editDiaryEntryInnerContainer">
+            <div id="diaryPopUpHeading"></div>
+            <div id="diaryPopUpDate"></div>
+            <div id="diaryPopUpBalanceContainer">
+                <i class="fa-solid fa-sterling-sign" style="font-size: 24px; margin-right: 10px; position: relative; top: 10px; color: #30ff30;"></i>
+                <input id="diaryPopUpBalance" type="number" placeholder="Balance" />
+            </div>
+            <div id="diaryPopUpNotes">
+                <textarea id="diaryNotes" placeholder="Add notes"></textarea>
+            </div>
+              
+            <div id="diaryButtonsContainer">
+                <div id="diarySave" data-amount="0" data-date="" data-type="" class="diaryButton" onclick="vars.App.saveDiaryEntry()">SAVE</div>
+                <div id="diaryCancel" class="diaryButton" onclick="vars.UI.diary.class.showDiaryPopUp()">CANCEL</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="showDiaryNoteContainer">
+        <div id="showDiaryNote">
+            <div id="sDN_heading">Viewing diary entry []</div>
+            <div id="sDN_details"></div>
+            <div id="sDN_buttons">
+                <div id="sDNB_cancel" class="sDNB_button" onclick="vars.UI.diary.class.showDiaryNoteDiv.show()">Close</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="diaryHeadingImages"></div>
+
+    <div id="smallPopUp" class=""></div>
+
+    <div id="audioContainer" class="hidden">
+        <audio id="s_whooshIn" src="assets/audio/whooshIn.ogg"></audio>
+        <audio id="s_whooshOut" src="assets/audio/whooshOut.ogg"></audio>
+        <audio id="s_siren" src="assets/audio/siren.ogg"></audio>
+    </div>
+
+    <div id="timerContainer">
+        <div id="tC_setContainer">
+            <div class="tC_hours tC_section">
+                <div class="tC_hInc tC_incDec" onclick="vars.App.timerIncDec('h','inc')"><i class="fa-solid fa-circle-chevron-up"></i></div>
+                <div id="tC_hVal">0</div>
+                <div class="tC_hDec tC_incDec" onclick="vars.App.timerIncDec('h','dec')"><i class="fa-solid fa-circle-chevron-down"></i></div>
+            </div>
+            <div class="tC_section">
+                <div class="tC_incDec"></div>
+                <div id="tC_hText">h</div>
+                <div class="tC_incDec"></div>
+            </div>
+            <div class="tC_min10s tC_section">
+                <div class="tC_mTInc tC_incDec" onclick="vars.App.timerIncDec('m10','inc')"><i class="fa-solid fa-circle-chevron-up"></i></div>
+                <div id="tC_m10Val">0</div>
+                <div class="tC_mTDec tC_incDec" onclick="vars.App.timerIncDec('m10','dec')"><i class="fa-solid fa-circle-chevron-down"></i></div>
+            </div>
+            <div class="tC_mins tC_section">
+                <div class="tC_mInc tC_incDec" onclick="vars.App.timerIncDec('m','inc')"><i class="fa-solid fa-circle-chevron-up"></i></div>
+                <div id="tC_mVal">0</div>
+                <div class="tC_mDec tC_incDec" onclick="vars.App.timerIncDec('m','dec')"><i class="fa-solid fa-circle-chevron-down"></i></div>
+            </div>
+            <div class="tC_section">
+                <div class="tC_incDec"></div>
+                <div id="tC_startButton" onclick="vars.App.timerStart()">START</div>
+                <div class="tC_incDec"></div>
+            </div>
+        </div>
+        <div id="tC_countdownContainer">
+            <div id="tC_timeRemaining">0:00:00</div>
+            <div id="tC_cCStop" onclick="vars.App.timerReset()">STOP</div>
+        </div>
+    </div>
+
+    <div id="youtubeVideoList" class="hidden"></div>
+
+    <div id="currentTimeContainer"></div>
+
+    <div id="currentIPContainer">???.???.???.???</div>
+
+    <div id="darkenContainer"></div>
+
+    <div id="videoContainer" class="hidden">
+        <video id="videoPlayer" autoplay controls ></video>
+    </div>
+
+</body>
+</html>

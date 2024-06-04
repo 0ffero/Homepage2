@@ -1,0 +1,105 @@
+#currentTimeContainer {
+    background-color: #272727;
+    border: 6px solid #147ea7;
+    font-size: 18px;
+    justify-content: flex-end;
+    max-width: 350px;
+    min-width: 350px;
+    padding: 10px 20px;
+    position: fixed;
+    width: 350px;
+    z-index: 10;
+}
+
+#timerContainer {
+    background-color: #272727;
+    border: 6px solid #147ea7;
+    display: flex;
+    flex-direction: column;
+    font-size: 28px;
+    height: 150px;
+    max-width: 350px;
+    overflow: hidden;
+    position: fixed;
+    padding: 20px;
+    right: 0;
+    top: 0;
+    z-index: 10;
+}
+@keyframes flashContainer {
+    0% { background-color: #272727; }
+    50% { background-color: #ffbb00; }
+    100% { background-color: #272727 }
+}
+.timerContainer_flash {
+    animation-duration: 1s;
+    animation-name: flashContainer;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    position: relative;
+    top: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    right: 38px;
+}
+
+#tC_countdownContainer {
+    transition: 333ms;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+.tC_countdownContainer_slideUp {
+    transform: translateY(-155px);
+}
+
+#tC_hText {
+    position: relative;
+    top: 28px;
+}
+
+.tC_incDec {
+    transition: 333ms;
+}
+.tC_incDec:hover {
+    scale: 1.15;
+    color: #4489E4;
+}
+
+.tC_section {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+#tC_setContainer {
+    transition: 333ms;
+    column-gap: 20px;
+}
+.tC_setContainer_slideUp {
+    transform: translateY(-200px);
+}
+
+#tC_startButton, #tC_cCStop {
+    transition: 200ms;
+
+    align-content: center;
+    background-color: #4489E4;
+    border: 3px solid #1a457f;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: bold;
+    height: 40px;
+    justify-content: center;
+    margin: 5px;
+    position: relative;
+    text-shadow: 1px 1px 3px black;
+    top: 18px;
+    width: 150px;
+}

@@ -1,0 +1,141 @@
+body { 
+    background-color: #111111;
+    color: #d8dbe0;
+    font-family: Roboto;
+    font-size: 12px;
+    margin: 0;
+    overflow-x: hidden;
+    padding: 0;
+}
+
+div {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.copyIcon {
+    cursor: pointer;
+}
+
+#darkenContainer {
+    transition: 1000ms;
+
+    opacity: 0;
+    background-color: #000000f0;
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: -1;
+}
+
+.dC_show {
+    opacity: 1 !important;
+    z-index: 10 !important;
+}
+
+
+.error {
+    padding: 5px;
+    background-color: #770000;
+    color: white;
+}
+
+
+
+.hlMPButton {
+    background: linear-gradient(45deg, rgba(20,126,167,1) 0%, rgba(20,126,167,1) 0%, rgba(255,255,255,1) 50%, rgba(20,126,167,1) 100%);
+}
+
+
+#mainPageContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.subContainer {
+    flex-wrap: wrap;
+}
+
+.button {
+    transition: 333ms;
+
+    align-items: center;
+    background-color: #ffffff;
+    border: 6px solid #147ea7;
+    border-radius: 30px;
+    color: #1c1c1c;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    margin: 20px;
+    padding: 10px;
+    width: 200px;
+}
+
+.button:hover {
+    scale: 1.1;
+    transform: perspective( 600px ) rotateY( 33deg );
+}
+
+
+#currentIPContainer {
+    font-size: 16px;
+    color: #777777;
+    position: fixed;
+    left: 5px;
+    bottom: 5px;
+}
+
+.cIPC_vpn {
+    color: #30ff30 !important;
+}
+
+
+#showDiaryContainer {
+    flex-direction: column;
+    margin-top: 30px;
+    max-width: 1400px;
+    padding: 20px 10px;
+    width: 90%;
+}
+
+
+.response_error {
+    color: #ff3030;
+}
+
+.response_valid {
+    color: #30ff30;
+}
+
+.response_unknown {
+    color: #ff8030;
+}
+
+#smallPopUp {
+    transition: 500ms;
+
+    background-color: #111111;
+    border: solid 1px #333333;
+    bottom: 0;
+    flex-direction: column;
+    font-size: 18px;
+    padding: 10px;
+    position: fixed;
+    right: 0;
+    transform: translateX(101vw);
+    z-index: 999;
+}
+
+.smallPopUpSlideIn {
+    transform: translateX(0) !important;
+}

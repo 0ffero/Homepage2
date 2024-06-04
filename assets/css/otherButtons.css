@@ -1,0 +1,58 @@
+#otherButtons {
+    align-items: center;
+    background-color: #111111;
+    flex-direction: column;
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+}
+
+#oB_actualButtons {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.oB_button {
+    transition: 200ms;
+    align-content: center;
+    background-color: #4489E4;
+    border: 3px solid #1a457f;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: bold;
+    height: 40px;
+    justify-content: center;
+    margin: 5px;
+    text-shadow: 1px 1px 3px black;
+    width: 150px;
+}
+
+.oB_buttonEmpty {
+    border: 3px solid #00000000;
+    flex-wrap: wrap;
+    height: 40px;
+    justify-content: center;
+    margin: 5px;
+    width: 256px;
+}
+
+#oB_closeOthersPage {
+    transition: 500ms;
+    color: #4489E4;
+    cursor: pointer;
+    font-size: 20px;
+    justify-content: flex-end;
+    position: absolute;
+    right: 18px;
+    top: 9px;
+}
+
+#oB_closeOthersPage:hover {
+    scale: 150%;
+}
