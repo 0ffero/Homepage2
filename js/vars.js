@@ -249,10 +249,6 @@ var vars = {
             if (vars.UI.youtubeVideoList && vars.UI.youtubeVideoList.class.videoPlayer) {
                 vars.UI.youtubeVideoList.class.update();
             };
-        },
-
-        youtubeVideoListClick: (fileName)=> {
-            vars.UI.youtubeVideoList.class.clickYTRow(fileName);
         }
     },
 
