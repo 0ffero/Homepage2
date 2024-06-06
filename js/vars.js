@@ -123,7 +123,7 @@ var vars = {
             { image: "tsb.png",               text: "TSB",                    type: "",           vpn: false,   url: "https://internetbanking.tsb.co.uk/personal/logon/login/#/login" },
             { image: "yify.png",              text: "YIFY",                   type: "dl",         vpn: true,    url: "https://yts.rs/" },
             { image: "ytvids.png",            text: "Youtube Videos",         type: "internal",   vpn: false,   url: "" },
-            { image: "youtube.png",           text: "Youtube",                type: "media",      vpn: false,   url: "https://www.youtube.com" }
+            { image: "youtube.png",           text: "Youtube",                type: "media",      vpn: false,   url: "https://www.youtube.com/feed/subscriptions" }
         ],
         IP: '???.???.???.???',
         vmIP: '86.',
