@@ -98,9 +98,7 @@ var vars = {
             { image: "1337x.png",             text: "1337x",                  type: "dl",         vpn: true,    url: "https://1337x.to/top-100" },
             { image: "adobecolour.png",       text: "Adobe Colour",           type: "dev",        vpn: false,   url: "https://color.adobe.com/create/color-wheel" },
             { image: "amazon.png",            text: "Amazon",                 type: "shop",       vpn: false,   url: "https://www.amazon.co.uk" },
-            { image: "audiobookplayer.png",   text: "Audio Book Player 2",    type: "media",      vpn: false,   url: "http://offero04.gw/Apps/aBP/current/" },
             { image: "cex.png",               text: "CEX",                    type: "shop",       vpn: false,   url: "https://uk.webuy.com/" },
-            { image: "cloch.png",             text: "Cloch Housing",          type: "contact",    vpn: false,   url: "https://my.clochhousing.org.uk/auth/login?r=dashboard" },
             { image: "dodi.png",              text: "DODI",                   type: "dl",         vpn: true,    url: "https://dodi-repacks.site/" },
             { image: "ebay.png",              text: "E-Bay",                  type: "shop",       vpn: false,   url: "https://www.ebay.co.uk" },
             { image: "facebook.png",          text: "Facebook",               type: "social",     vpn: false,   url: "https://www.facebook.com" },
@@ -111,16 +109,12 @@ var vars = {
             { image: "googlemaps.png",        text: "Google Maps",            type: "google",     vpn: false,   url: "https://maps.google.co.uk" },
             { image: "hurawatch.png",         text: "Hura Watch",             type: "media",      vpn: false,   url: "https://hurawatch.cc/" },
             { image: "imdb.png",              text: "IMDB",                   type: "misc",       vpn: false,   url: "https://www.imdb.com" },
-            { image: "jellyfin.png",          text: "Jellyfin",               type: "media",      vpn: false,   url: "http://offero04.gw:8096/web/index.html#!/home.html" },
             { image: "magnetdl.png",          text: "MagnetDL",               type: "dl",         vpn: true,    url: "https://www.magnetdl.com/" },
             { image: "money.png",             text: "Diary",                  type: "internal",   vpn: false,   url: "" },
-            { image: "mvplayer.png",          text: "MV Player",              type: "media",      vpn: false,   url: "http://offero04.gw/Apps/mvplayer/current/" },
             { image: "myanonymouse.png",      text: "My Anonymouse",          type: "dl",         vpn: true,    url: "https://www.myanonamouse.net/login.php?returnto=%2Ftor%2Fbrowse.php" },
-            { image: "patientaccess.png",     text: "Patient Access",         type: "contact",    vpn: false,   url: "https://account.patientaccess.com/Account/Login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dpkce_patientaccess_web%26redirect_uri%3Dhttps%253A%252F%252Fapp.patientaccess.com%252Fsignin-callback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520patientaccess_api%26state%3D7eafcd21aa07492e9d9f0b77537e520b%26code_challenge%3DXXsSJaJeUb0uGjlzyGw3TrkS3m7E32dSLen7KGrr4UE%26code_challenge_method%3DS256%26response_mode%3Dquery%26titleType%3Ddefault" },
             { image: "rarbg.png",             text: "RarBG",                  type: "dl",         vpn: true,    url: "https://rargb.to/" },
             { image: "tesco.png",             text: "Tesco",                  type: "shop",       vpn: false,   url: "https://www.tesco.com" },
             { image: "torrentday.png",        text: "Torrent Day",            type: "dl",         vpn: true,    url: "https://tday.love/t" },
-            { image: "tsb.png",               text: "TSB",                    type: "",           vpn: false,   url: "https://internetbanking.tsb.co.uk/personal/logon/login/#/login" },
             { image: "yify.png",              text: "YIFY",                   type: "dl",         vpn: true,    url: "https://yts.rs/" },
             { image: "ytvids.png",            text: "Youtube Videos",         type: "internal",   vpn: false,   url: "" },
             { image: "youtube.png",           text: "Youtube",                type: "media",      vpn: false,   url: "https://www.youtube.com/feed/subscriptions" }
@@ -311,7 +305,8 @@ var vars = {
         },
 
         addURLToComboList: (url,deleteIfFound=true)=> {
-            vars.UI.mainPage.class.addURLToComboList(url,deleteIfFound);
+            let valid = vars.UI.mainPage.class.addURLToComboList(url,deleteIfFound);
+            return valid;
         },
 
         buttonClickMain: (e,url)=> {
@@ -329,9 +324,20 @@ var vars = {
         dealWithRightClick: (e)=> {
             e.preventDefault();
             let buttonDiv;
-            if ([...e.target.classList].includes('button')) {
+            if ([...e.target.classList].includes('button')) { // user clicked on the button div
                 buttonDiv = e.target;
-                buttonDiv.classList.add('hlMPButton');
+                !buttonDiv.classList.contains('hlMPButton') && buttonDiv.classList.add('hlMPButton');
+            } else { // user clicked on a parent of the button div
+                let buttonDiv = null;
+                let c = 0;
+                let parentNode = e.target.parentNode;
+                while (!parentNode.classList.contains('button')) {
+                    parentNode = parentNode.parentNode;
+                    buttonDiv = parentNode;
+                    if (c>5) break;
+                    c++;
+                };
+                !buttonDiv.classList.contains('hlMPButton') && buttonDiv.classList.add('hlMPButton');
             };
 
             let parent = e.target.parentElement;

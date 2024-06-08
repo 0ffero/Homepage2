@@ -67,7 +67,7 @@ let UI_MainPage = class {
         if (!url || !url.startsWith('http')) return;
 
         if (this.comboLoad.includes(url)) { // we've found the url in the combo list
-            if (!deleteIfFound) return; // should we delete it? (default is NO)
+            if (!deleteIfFound) return; // should we delete it? (default is YES)
 
             // yes, remove it from the array
             let i = this.comboLoad.findIndex(cL=>cL===url);
@@ -107,7 +107,7 @@ let UI_MainPage = class {
         this.vpnRequired = false;
 
         // unhighlight comboloads
-        vars.UI.mainPage.class.comboLoadsUIReset();
+        this.comboLoadsUIReset();
     }
 
     comboLoadsUIReset() {
