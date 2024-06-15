@@ -1,0 +1,145 @@
+.musicFile, .videoFile {
+    transition: 500ms;
+
+    align-items: center;
+    column-gap: 5px;
+    display: flex;
+    font-size: 14px;
+}
+
+.musicFile:hover, .videoFile:hover {
+    transition: 500ms;
+
+    color: #30ff30;
+    cursor: pointer;
+}
+
+.ytAlready {
+    color: #30ff30;
+}
+
+.ytdlpButton {
+    border: 1px solid white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: 9px 5px;
+    padding: 8px 10px;
+    width: 120px;
+}
+#ytdlpButtonClose:hover {
+    background-color: #470000;
+    color: white;
+}
+
+.ytdlpButton:hover {
+    transition: 500ms;
+    background-color: white;
+    color: black;
+    scale: 1.1;
+}
+
+#ytdlpButtonsContainer {
+    display: flex;
+    column-gap: 15px;
+}
+
+#ytdlpContainer {
+    align-items: center;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: -1;
+}
+
+.ytdlpContainerShow {
+    transition: 500ms;
+    opacity: 1 !important;
+    z-index: 10 !important;
+}
+
+#ytdlpHeader {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 15px;
+    text-align: center;
+}
+
+#ytdlpUpdateResponseText {
+    margin-bottom: 8px;
+}
+
+#ytdlpVideos {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 1800px;
+}
+
+#ytDownloaderContainer {
+    align-items: center;
+    background-color: #470000;
+    border: 1px solid #bbbbbb;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding: 15px 0px;
+    row-gap: 15px;
+    width: 1448px;
+}
+
+#ytDLHeader {
+    background-color: #470000;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 10px 194px;
+}
+
+#ytDLInputContainer {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.ytDLOption {
+    accent-color: #470000;
+    margin-bottom: 3px;
+}
+
+#ytDLURL {
+    padding: 3px 5px;
+    width: 300px;
+}
+
+.ytFileHeadings {
+    background-color: #bbbbbb;
+    color: black;
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    justify-content: center;
+    letter-spacing: 4px;
+    padding: 5px;
+    width: 80%;
+}
+
+.ytUpdated {
+    color: yellow;
+}
+
+#ytVideoList, #ytMusicList {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 5px 15px;
+    row-gap: 10px;
+    width: 80%;
+}

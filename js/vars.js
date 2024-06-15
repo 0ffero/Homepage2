@@ -116,7 +116,7 @@ var vars = {
             { image: "tesco.png",             text: "Tesco",                  type: "shop",       vpn: false,   url: "https://www.tesco.com" },
             { image: "torrentday.png",        text: "Torrent Day",            type: "dl",         vpn: true,    url: "https://tday.love/t" },
             { image: "yify.png",              text: "YIFY",                   type: "dl",         vpn: true,    url: "https://yts.rs/" },
-            { image: "ytvids.png",            text: "Youtube Videos",         type: "internal",   vpn: false,   url: "" },
+            { image: "ytdl.png",              text: "Youtube Downloader",     type: "internal",   vpn: false,   url: "" },
             { image: "youtube.png",           text: "Youtube",                type: "media",      vpn: false,   url: "https://www.youtube.com/feed/subscriptions" }
         ],
         IP: '???.???.???.???',
@@ -377,6 +377,7 @@ var vars = {
             ui.diary = new UI('diary');
             ui.smallPopUp = new UI('smallPopUp');
             ui.mainPage = new UI('mainPage');
+            ui.ytdlp = new YoutubeDownlaoder();
 
             vars.UI.resizeMainContainer();
 

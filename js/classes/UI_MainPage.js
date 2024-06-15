@@ -22,7 +22,7 @@ let UI_MainPage = class {
             {
                 containerName: 'Media',
                 buttons: [
-                    'Youtube','BLANK','BLANK','BLANK','BLANK','BLANK','IMDB','Hura Watch','YIFY'
+                    'Youtube','Youtube Downloader','BLANK','BLANK','BLANK','BLANK','IMDB','Hura Watch','YIFY'
                 ]
             },
             {
@@ -142,8 +142,8 @@ let UI_MainPage = class {
                             js = `onclick="vars.UI.diary.class.showSwitch()"`;
                         break;
 
-                        case 'Youtube Videos':
-                            js = `onclick="vars.UI.youtubeVideoList.class.mainContainerSwitchVisibility()"`;
+                        case 'Youtube Downloader':
+                            js = `onclick="vars.UI.ytdlp.showContainer()"`;
                         break;
 
                         default: // unknown button!
@@ -164,9 +164,9 @@ let UI_MainPage = class {
 
 
             html += `<div data-url="${url}" class="buttonContainer" ${js}>
-                        <div class="button">
+                        <div class="button" style="background-image: url('./assets/images/buttons/${image}');">
                             <div class="buttonImage">
-                                <img src="./assets/images/buttons/${image}"></img>
+                                &nbsp;
                             </div>
                             <div class="buttonText">${text}</div>
                         </div>
