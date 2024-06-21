@@ -374,10 +374,10 @@ var vars = {
             console.log(`%cInit: UI`,'color: #30ff30');
             let ui = vars.UI;
 
+            ui.ytdlp = new YoutubeDownlaoder();
             ui.diary = new UI('diary');
             ui.smallPopUp = new UI('smallPopUp');
             ui.mainPage = new UI('mainPage');
-            ui.ytdlp = new YoutubeDownlaoder();
 
             vars.UI.resizeMainContainer();
 

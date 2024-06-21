@@ -57,12 +57,21 @@ foreach ($notesFileArray as $note) {
     *                           *
     *****************************
 */
-$pip_date = "20220809"; $pip_amount = 272.40;
-while ($pip_date*1<=$endDate*1) {
-    $date = strtotime($pip_date);
-    $pip_date = date("Ymd", strtotime("+28 day", $date));
-    if ($pip_date*1>=$startDate*1 && $pip_date*1<=$endDate*1) {
-        $moneyArray[$pip_date][] = ['type'=>'PIP', 'amount'=>$pip_amount, 'deduction'=>false];
+$uc_date = "20240619"; $uc_amount = 290.00;
+while ($uc_date*1<=$endDate*1) {
+    $date = strtotime($uc_date);
+    $uc_date = date("Ymd", strtotime("+28 day", $date));
+    if ($uc_date*1>=$startDate*1 && $uc_date*1<=$endDate*1) {
+        $moneyArray[$uc_date][] = ['type'=>'UC', 'amount'=>$uc_amount, 'deduction'=>false];
+    };
+};
+
+$adp_date = "20240614"; $adp_amount = 143.00;
+while ($adp_date*1<=$endDate*1) {
+    $date = strtotime($adp_date);
+    $adp_date = date("Ymd", strtotime("+14 day", $date));
+    if ($adp_date*1>=$startDate*1 && $adp_date*1<=$endDate*1) {
+        $moneyArray[$adp_date][] = ['type'=>'ADP', 'amount'=>$adp_amount, 'deduction'=>false];
     };
 };
 
@@ -79,14 +88,14 @@ while ($pip_date*1<=$endDate*1) {
 */
 
 // NETFLIX -- EXAMPLE
-$netflix_date = "20240101"; $netflix_amount=14.99;
+/* $netflix_date = "20240101"; $netflix_amount=14.99;
 while ($netflix_date*1<=$endDate*1) {
     $date = strtotime($netflix_date);
     $netflix_date = date("Ymd", strtotime("+1 month", $date));
     if ($netflix_date*1>=$startDate*1 && $netflix_date*1<=$endDate*1) {
         $moneyArray[$netflix_date][] = ['type'=>'Netflix', 'amount'=>$netflix_amount, 'deduction'=>true];
     };
-};
+}; */
 
 
 /*
