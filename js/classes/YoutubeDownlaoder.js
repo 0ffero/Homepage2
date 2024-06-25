@@ -88,7 +88,7 @@ let YoutubeDownlaoder = class {
         let clickFunction = 'vars.UI.ytdlp.clickMusic';
         let musicHTML = '';
         music.forEach((m)=> {
-            musicHTML += `<div class="musicFile"><input type="checkbox" onclick="${clickFunction}('${m}',this.checked);"> ${m}</div>`;
+            musicHTML += `<div class="musicFileContainer"><input type="checkbox" onclick="${clickFunction}('${m},this.checked');"><i onclick="vars.UI.ytdlp.editFileName('music','${v}')" onclick="${clickFunction}('${m}',this.checked);"><div class="musicFile">${m}</div>`;
         });
         !musicHTML && (musicHTML='No Music Files Found');
         musicListContainer.innerHTML = musicHTML;
@@ -97,17 +97,19 @@ let YoutubeDownlaoder = class {
         clickFunction = 'vars.UI.ytdlp.clickVideo';
         let videoHTML = '';
         videos.forEach((v)=> {
-            videoHTML += `<div class="videoFile"><input type="checkbox" onclick="${clickFunction}('${v},this.checked');"> ${v}</div>`;
+            videoHTML += `<div class="videoFileContainer"><input type="checkbox" onclick="${clickFunction}('${v},this.checked');"><i onclick="vars.UI.ytdlp.editFileName('video','${v}')" class="ytEditIcon fa-solid fa-pen-to-square"></i><div class="videoFile">${v}</div></div>`;
         });
         !videoHTML && (videoHTML='No Video Files Found');
         videoListContainer.innerHTML = videoHTML;
     }
 
     clickMusic(fileName,add) {
+        debugger;
         this.addToMusicList(fileName,add);
     }
 
     clickVideo(fileName,add) {
+        debugger;
         this.addToVideoList(fileName,add);
     }
 
@@ -184,16 +186,28 @@ let YoutubeDownlaoder = class {
     }
 
     downloadHandler(rs) {
-        debugger;
         let className = rs.ERROR ? 'error' : 'good';
         let msg = rs.ERROR ? rs.ERROR : 'Downloaded Successfully';
         this.createOutputMessage(msg, className);
         if (rs.ERROR) return;
         
         // no errors found, display success or warning for file rename
+        msg = rs.success ? rs.success : rs.warning;
+        msg += `<br/>${rs.file_name}`; // and show the file name it was saved as
         setTimeout(()=> {
-            this.createOutputMessage(rs.success? rs.success : rs.warning, className);
+            this.createOutputMessage(msg, className);
         }, 2000);
+    }
+
+    editFileName(type=null,fileName=null) {
+        if (!type || !fileName) return false;
+        debugger;
+        if (type==='video') {
+            
+            return;
+        };
+
+        // audio file name change
     }
 
     getVideoAndMusicList() {

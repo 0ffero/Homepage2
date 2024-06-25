@@ -58,15 +58,15 @@ $url = "https://www.youtube.com/watch?v=$id";
 // generate the exe string
 if ($video==='yes') {
 	$op['download_type'] = 'video';
-	$outputFolder = './videos/';
+	$outputFolder = './videos';
 	$bat = "yt-dlp -f mp4 --write-thumbnail $url -P $outputFolder 2>&1";
 } else if ($video==='no') {
 	$op['download_type'] = 'music';
-	$outputFolder = './music/';
+	$outputFolder = './music';
 	$bat = "yt-dlp -f m4a $url -P $outputFolder 2>&1";
 };
 
-$op['bat'] = $bat;
+//$op['bat'] = $bat;
 
 if (!is_dir($outputFolder)) {
 	mkdir($outputFolder);
@@ -81,6 +81,7 @@ if (!substr_count($rs,'[download] 100% of')) {
 };
 
 // check for the file and rename it
+$bad = ["'", '"'];
 $found = false;
 $files = scandir($outputFolder);
 foreach ($files as $file) {
@@ -88,6 +89,8 @@ foreach ($files as $file) {
 		$found = true;
 		$originalFileName = $outputFolder . '/' . $file; 							// original file name
 		$fRename = $outputFolder . '/' . str_replace(' [' . $id . ']','',$file); 	// new file name
+		$fRename = str_replace($bad,'',$fRename);
+		$op['file_name'] = str_replace($outputFolder . '/','',$fRename);
 		rename($originalFileName, $fRename);
 		if (!is_file($fRename)) {
 			$op['warning'] = 'Main file couldnt be renamed!';
@@ -99,6 +102,7 @@ foreach ($files as $file) {
 		if ($video==='yes') {
 			$imageFileName = str_replace('.mp4', '.webp', $originalFileName);
 			$iFRename = str_replace(' [' . $id . ']','',$imageFileName);
+			$iFRename = str_replace($bad,'',$iFRename);
 			rename($imageFileName, $iFRename);
 			if (!is_file($iFRename)) {
 				$op['warning'] .= '<br/>Image File couldnt be renamed!';

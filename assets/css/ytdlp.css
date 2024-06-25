@@ -14,6 +14,10 @@
     cursor: pointer;
 }
 
+.musicFileContainer, .videoFileContainer {
+    align-items: center;
+}
+
 .ytAlready {
     color: #30ff30;
 }
@@ -147,6 +151,11 @@
 #ytDLURL {
     padding: 3px 5px;
     width: 320px;
+}
+
+.ytEditIcon {
+    cursor: pointer;
+    margin: 0 15px;
 }
 
 .ytFileHeadings {
