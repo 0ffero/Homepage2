@@ -83,6 +83,17 @@
     width: 1800px;
 }
 
+#ytDLDownloadButton {
+    background-color: #390000;
+    border: 1px solid #470000;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+#ytDLDownloadButton:hover {
+    transition: 250ms;
+    border: 1px solid #91687b !important;
+}
+
 #ytDownloaderContainer {
     align-items: center;
     background-color: #470000;
@@ -95,6 +106,16 @@
     width: 1448px;
 }
 
+.ytDLError {
+    font-weight: bold;
+    color: #ff3030;
+}
+
+.ytDLGood {
+    font-weight: bold;
+    color: #30ff30;
+}
+
 #ytDLHeader {
     background-color: #470000;
     color: white;
@@ -105,9 +126,10 @@
 }
 
 #ytDLInputContainer {
-    display: flex;
-    column-gap: 10px;
     align-items: center;
+    column-gap: 10px;
+    display: flex;
+    height: 30px;
 }
 
 .ytDLOption {
@@ -115,9 +137,16 @@
     margin-bottom: 3px;
 }
 
+#ytDLOutput {
+    background-color: #390000;
+    flex-direction: column-reverse;
+    padding: 20px;
+    width: 80%;
+}
+
 #ytDLURL {
     padding: 3px 5px;
-    width: 300px;
+    width: 320px;
 }
 
 .ytFileHeadings {

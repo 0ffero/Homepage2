@@ -275,6 +275,12 @@ var vars = {
         }
     },
 
+    handlers: {
+        getYouTubeVideoOrAudio: (rs)=> {
+            vars.UI.ytdlp.downloadHandler(rs);
+        }
+    },
+
     input: {
         combo: '',
         combos: [
@@ -311,6 +317,10 @@ var vars = {
 
         buttonClickMain: (e,url)=> {
             vars.UI.mainPage.class.buttonClickMain(url);
+        },
+
+        buttonClickYTDL: ()=> {
+            vars.UI.ytdlp.downloadClick();
         },
 
         buttonClickOthers: (which)=> {
