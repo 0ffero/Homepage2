@@ -46,6 +46,28 @@ let YoutubeDownlaoder = class {
         this.outputDiv = this.gID('ytDLOutput');
     }
 
+    addDownloadedMusicToUI(m) {
+        let clickFunction = 'vars.UI.ytdlp.clickMusic';
+        let musicHTML = `
+            <div class="musicFileContainer">
+                <input type="checkbox" onclick="${clickFunction}('${m},this.checked');">
+                <i onclick="vars.UI.ytdlp.editFileName('music','${m}')" class="ytEditIcon fa-solid fa-pen-to-square"></i>
+                <div class="musicFile">${m}</div>
+            </div>`;
+        this.musicListContainer.innerHTML += musicHTML;
+    }
+
+    addDownloadedVideoToUI(v) {
+        let clickFunction = 'vars.UI.ytdlp.clickVideo';
+        let videoHTML = `
+            <div class="videoFileContainer">
+                <input type="checkbox" onclick="${clickFunction}('${v},this.checked');">
+                <i onclick="vars.UI.ytdlp.editFileName('video','${v}')" class="ytEditIcon fa-solid fa-pen-to-square"></i>
+                <div class="videoFile">${v}</div>
+            </div>`;
+        this.videoListContainer.innerHTML += videoHTML;
+    }
+
     addToMusicList(fileName, add) {
         if (add) {
             this.musicList.push(fileName)
@@ -77,18 +99,21 @@ let YoutubeDownlaoder = class {
     }
 
     addVideoAndMusicListToUI(list) {
-        this.files = list; // cache the file list
-
-        let musicListContainer = this.gID('ytMusicList');
-        let music = list.music;
-        let videoListContainer = this.gID('ytVideoList');
-        let videos = list.videos;
+        let musicListContainer = this.musicListContainer = this.gID('ytMusicList');
+        let music = this.musicList = list.music;
+        let videoListContainer = this.videoListContainer = this.gID('ytVideoList');
+        let videos = this.videoList = list.videos;
 
         // build the music list
         let clickFunction = 'vars.UI.ytdlp.clickMusic';
         let musicHTML = '';
         music.forEach((m)=> {
-            musicHTML += `<div class="musicFileContainer"><input type="checkbox" onclick="${clickFunction}('${m},this.checked');"><i onclick="vars.UI.ytdlp.editFileName('music','${v}')" onclick="${clickFunction}('${m}',this.checked);"><div class="musicFile">${m}</div>`;
+            musicHTML += `
+            <div class="musicFileContainer">
+                <input type="checkbox" onclick="${clickFunction}('${m},this.checked');">
+                <i onclick="vars.UI.ytdlp.editFileName('music','${m}')" class="ytEditIcon fa-solid fa-pen-to-square"></i>
+                <div class="musicFile">${m}</div>
+            </div>`;
         });
         !musicHTML && (musicHTML='No Music Files Found');
         musicListContainer.innerHTML = musicHTML;
@@ -97,7 +122,12 @@ let YoutubeDownlaoder = class {
         clickFunction = 'vars.UI.ytdlp.clickVideo';
         let videoHTML = '';
         videos.forEach((v)=> {
-            videoHTML += `<div class="videoFileContainer"><input type="checkbox" onclick="${clickFunction}('${v},this.checked');"><i onclick="vars.UI.ytdlp.editFileName('video','${v}')" class="ytEditIcon fa-solid fa-pen-to-square"></i><div class="videoFile">${v}</div></div>`;
+            videoHTML += `
+            <div class="videoFileContainer">
+                <input type="checkbox" onclick="${clickFunction}('${v},this.checked');">
+                <i onclick="vars.UI.ytdlp.editFileName('video','${v}')" class="ytEditIcon fa-solid fa-pen-to-square"></i>
+                <div class="videoFile">${v}</div>
+            </div>`;
         });
         !videoHTML && (videoHTML='No Video Files Found');
         videoListContainer.innerHTML = videoHTML;
@@ -192,11 +222,20 @@ let YoutubeDownlaoder = class {
         if (rs.ERROR) return;
         
         // no errors found, display success or warning for file rename
+        let fName = rs.file_name;
         msg = rs.success ? rs.success : rs.warning;
-        msg += `<br/>${rs.file_name}`; // and show the file name it was saved as
+        msg += `<br/>${fName}`; // and show the file name it was saved as
         setTimeout(()=> {
             this.createOutputMessage(msg, className);
         }, 2000);
+
+        // add it to the music or video list
+        if (rs.rq.video==='yes') {
+            this.addDownloadedVideoToUI(fName);
+            return;
+        };
+
+        this.addDownloadedMusicToUI(fName);
     }
 
     editFileName(type=null,fileName=null) {
