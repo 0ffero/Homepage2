@@ -96,6 +96,7 @@ let UI_Diary = class {
                     this.currentCash += n.deduction ? n.amount*-1 : n.amount;
                     let className = n.deduction ? 'd_deduction' : 'd_incoming';
                     this.currentCash = this.currentCash.toFixed(2)*1;
+                    n.amount*=1; // make sure amount is a number (saving an owed amount enters as a string)
                     subDiv.innerHTML += `<div class="${className}">${n.type}: &pound;${n.amount.toFixed(2)}</div>`;
                 };
             });
@@ -239,7 +240,7 @@ let UI_Diary = class {
                     if (n) { delete(details.deduction); }; // balance reset found. remove the deduction var from the details
                     aV.money[moneyIndex].notes.push(details);
                 } else {
-                    aV.money.push({ date: date, notes: [details]});
+                    aV.money.push([{ date: date, notes: [details]}]);
                 };
             };
         });

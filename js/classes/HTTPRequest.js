@@ -23,7 +23,7 @@ let HTTPRequest = class {
     }
 
     getCurrentIP() {
-        let url = 'endpoints/getCurrentIP.php';
+        let url = 'http://offero04.io/homepage2/current/endpoints/getCurrentIP.php';
         this.doRequest(url,null,this.getCurrentIPHandler);
     }
     getCurrentIPHandler(rs) {

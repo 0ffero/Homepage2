@@ -1,6 +1,6 @@
 var vars = {
 
-    version: "0.91",
+    version: "1.0",
 
     getElementByID(id) {
         if (!id) return false;
@@ -39,6 +39,16 @@ var vars = {
                 lS[`${lV.pre}_ytwatching`] = '[]';
             };
             vars.App.ytWatchingList = JSON.parse(lS[`${lV.pre}_ytwatching`]);
+
+            if (!lS[`${lV.pre}_lastAlertDate`]) {
+                lS[`${lV.pre}_lastAlertDate`] = 0;
+            };
+        },
+
+        getLastAlertDate: ()=> {
+            let lS = window.localStorage;
+            let lV = vars.localStorage;
+            return lS[`${lV.pre}_lastAlertDate`]*1;
         },
 
         saveCurrentYTPositions: ()=> {
@@ -47,6 +57,12 @@ var vars = {
 
             // save ytwatchinglist
             lS[`${lV.pre}_ytwatching`] = JSON.stringify(vars.App.ytWatchingList);
+        },
+
+        saveLastAlertDate: (lastAlertDate)=> {
+            let lS = window.localStorage;
+            let lV = vars.localStorage;
+            lS[`${lV.pre}_lastAlertDate`] = lastAlertDate;
         },
 
         saveLastSeen: ()=> {
@@ -93,12 +109,15 @@ var vars = {
         vars.App.init();
     },
 
+    
     App: {
         buttons: [
             { image: "1337x.png",             text: "1337x",                  type: "dl",         vpn: true,    url: "https://1337x.to/top-100" },
             { image: "adobecolour.png",       text: "Adobe Colour",           type: "dev",        vpn: false,   url: "https://color.adobe.com/create/color-wheel" },
             { image: "amazon.png",            text: "Amazon",                 type: "shop",       vpn: false,   url: "https://www.amazon.co.uk" },
+            { image: "audiobookplayer.png",   text: "Audio Book Player 2",    type: "media",      vpn: false,   url: "http://offero04.gw/Apps/aBP/current/" },
             { image: "cex.png",               text: "CEX",                    type: "shop",       vpn: false,   url: "https://uk.webuy.com/" },
+            { image: "cloch.png",             text: "Cloch Housing",          type: "contact",    vpn: false,   url: "https://my.clochhousing.org.uk/auth/login?r=dashboard" },
             { image: "dodi.png",              text: "DODI",                   type: "dl",         vpn: true,    url: "https://dodi-repacks.site/" },
             { image: "ebay.png",              text: "E-Bay",                  type: "shop",       vpn: false,   url: "https://www.ebay.co.uk" },
             { image: "facebook.png",          text: "Facebook",               type: "social",     vpn: false,   url: "https://www.facebook.com" },
@@ -109,24 +128,57 @@ var vars = {
             { image: "googlemaps.png",        text: "Google Maps",            type: "google",     vpn: false,   url: "https://maps.google.co.uk" },
             { image: "hurawatch.png",         text: "Hura Watch",             type: "media",      vpn: false,   url: "https://hurawatch.cc/" },
             { image: "imdb.png",              text: "IMDB",                   type: "misc",       vpn: false,   url: "https://www.imdb.com" },
+            { image: "jellyfin.png",          text: "Jellyfin",               type: "media",      vpn: false,   url: "http://offero04.gw:8096/web/index.html#!/home.html" },
+            { image: "jobadmin.png",          text: "Job Admin",              type: "media",      vpn: false,   url: "http://offero04.io/jobadmin/current/" },
             { image: "magnetdl.png",          text: "MagnetDL",               type: "dl",         vpn: true,    url: "https://www.magnetdl.com/" },
             { image: "money.png",             text: "Diary",                  type: "internal",   vpn: false,   url: "" },
+            { image: "mvplayer.png",          text: "MV Player",              type: "media",      vpn: false,   url: "http://offero04.gw/Apps/mvplayer/current/" },
             { image: "myanonymouse.png",      text: "My Anonymouse",          type: "dl",         vpn: true,    url: "https://www.myanonamouse.net/login.php?returnto=%2Ftor%2Fbrowse.php" },
+            { image: "patientaccess.png",     text: "Patient Access",         type: "contact",    vpn: false,   url: "https://account.patientaccess.com/Account/Login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dpkce_patientaccess_web%26redirect_uri%3Dhttps%253A%252F%252Fapp.patientaccess.com%252Fsignin-callback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520patientaccess_api%26state%3D7eafcd21aa07492e9d9f0b77537e520b%26code_challenge%3DXXsSJaJeUb0uGjlzyGw3TrkS3m7E32dSLen7KGrr4UE%26code_challenge_method%3DS256%26response_mode%3Dquery%26titleType%3Ddefault" },
             { image: "rarbg.png",             text: "RarBG",                  type: "dl",         vpn: true,    url: "https://rargb.to/" },
             { image: "tesco.png",             text: "Tesco",                  type: "shop",       vpn: false,   url: "https://www.tesco.com" },
             { image: "torrentday.png",        text: "Torrent Day",            type: "dl",         vpn: true,    url: "https://tday.love/t" },
+            { image: "tsb.png",               text: "TSB",                    type: "",           vpn: false,   url: "https://internetbanking.tsb.co.uk/personal/logon/login/#/login" },
             { image: "yify.png",              text: "YIFY",                   type: "dl",         vpn: true,    url: "https://yts.rs/" },
-            { image: "ytdl.png",              text: "Youtube Downloader",     type: "internal",   vpn: false,   url: "" },
-            { image: "youtube.png",           text: "Youtube",                type: "media",      vpn: false,   url: "https://www.youtube.com/feed/subscriptions" }
+            { image: "ytdlp.png",             text: "Youtube Downloader",     type: "internal",   vpn: false,   url: "" },
+            { image: "ytvids.png",            text: "Youtube Videos",         type: "internal",   vpn: false,   url: "" },
+            { image: "youtube.png",           text: "Youtube",                type: "media",      vpn: false,   url: "https://www.youtube.com" }
         ],
+
+        endOfDayMsgShown: false,
+        endOfDayMsg: `Take your tablets!`,
+        
         IP: '???.???.???.???',
-        vmIP: '86.',
-        vpn: false,
-        ytCRCs: [],
         options: {
             timerMinutes: 0,
             timerPosition: { top: 0, left: 0 }
         },
+        screenSaver: {
+            timer: null,
+            max: 30,
+            current: null,
+
+            reset: ()=> {
+                let sS = vars.App.screenSaver;
+                sS.current=sS.max;
+            },
+
+            start: ()=> {
+                let sS = vars.App.screenSaver;
+                sS.current = sS.max;
+                sS.timer = setInterval(()=> {
+                    if (sS.current===-10) return;
+                    sS.current--;
+                    if (sS.current<=0) {
+                        sS.current=-10;
+                        vars.App.sleep();
+                    };
+                }, 1000);
+            }
+        },
+        vmIP: '86.',
+        vpn: false,
+        ytCRCs: [],
 
         init: ()=> {
             console.log(`%cInit: App`,'color: #30ff30');
@@ -134,6 +186,11 @@ var vars = {
             vars.App.timerClass = new Timer();
 
             vars.input.init();
+
+            vars.App.screenSaver.start();
+
+            let h = new Date().getHours();
+            if (h>=20 || h<8) { vars.App.darkenSwitch() };
         },
 
         checkForVPN: ()=> {
@@ -145,8 +202,12 @@ var vars = {
         },
 
         darkenSwitch: ()=> {
-            let div = vars.getElementByID('darkenContainer');
-            div.className = !div.className ? 'dC_show' : '';
+            // note that the darkn switch code has been moved to v.a.sleep()
+            let divs = [...document.getElementsByClassName('button')];
+            divs.forEach((c)=> {
+                let darken = !c.classList.contains('button_dark') ? true : false;
+                darken ? c.classList.add('button_dark') : c.classList.remove('button_dark')
+            });
         },
 
         extendDiaryEntry: (dateID,event)=> {
@@ -173,9 +234,28 @@ var vars = {
 
         openURL: (which)=> {
             switch (which) {
-                // example. remove 
-                case 'google':
-                    window.open('https://google.co.uk','_blank');
+                case 'dim':
+                    window.open('https://app.destinyitemmanager.com/4611686018467971358/d2/inventory','_blank');
+                break;
+
+                case 'phpmyadmin':
+                    window.open('http://localhost/phpmyadmin/index.php?route=/','_blank');
+                break;
+
+                case 'plesk':
+                    window.open('https://93017d1.online-server.cloud:8443/login_up.php?success_redirect_url=%2Fsmb%2Fdatabase%2Flist%2FdomainId%2F2','_blank');
+                break;
+
+                case 'scotia':
+                    window.open('http://offero04.io/scotiajobadmin/','_blank');
+                break;
+
+                case 'unicode':
+                    window.open('http://offero04.gw/Utils/unicode/','_blank');
+                break;
+
+                case 'errgw':
+                    window.open('http://offero04.gw/errorlog.php','_blank');
                 break;
 
                 default:
@@ -208,6 +288,11 @@ var vars = {
             vars.localStorage.saveTimerDefaultMinutes();
         },
 
+        showAIChat: (show=true)=> {
+            let div = vars.getElementByID('AIChatContainer');
+            div.className = show ? 'AIChatContainerShow' : '';
+        },
+
         showDiaryIfNotSeen: ()=> {
             let d = new Date();
             if (d.toLocaleDateString().split('/').reverse().join('')*1!==vars.App.options.lastSeen && d.getHours()>=9) {
@@ -224,6 +309,27 @@ var vars = {
 
         showInputType: (event,type,date)=> {
             vars.UI.diary.class.showInputType(event,type,date);
+        },
+
+        showOtherButtons: ()=> {
+            let ui = vars.UI;
+            !ui.otherButtons && (ui.otherButtons = new UI_OtherButtons());
+
+            // switch its visibility
+            let container = ui.otherButtons.container;
+            let className = container.className ? '' : 'hidden';
+            container.className = className;
+        },
+
+        showYTDLP: ()=> {
+            let cssClass = 'newYTDLContainerShow';
+            let div = vars.getElementByID('newYTDLContainer');
+            div.classList.contains(cssClass) ? div.classList.remove(cssClass) : div.classList.add(cssClass);
+        },
+
+        sleep: ()=> {
+            let div = vars.getElementByID('darkenContainer');
+            div.className = !div.className ? 'dC_show' : '';
         },
 
         timerIncDec: (which,incDec)=> {
@@ -243,6 +349,10 @@ var vars = {
             if (vars.UI.youtubeVideoList && vars.UI.youtubeVideoList.class.videoPlayer) {
                 vars.UI.youtubeVideoList.class.update();
             };
+        },
+
+        youtubeVideoListClick: (fileName)=> {
+            vars.UI.youtubeVideoList.class.clickYTRow(fileName);
         }
     },
 
@@ -275,17 +385,18 @@ var vars = {
         }
     },
 
-    handlers: {
-        getYouTubeVideoOrAudio: (rs)=> {
-            vars.UI.ytdlp.downloadHandler(rs);
-        }
-    },
-
     input: {
         combo: '',
         combos: [
-            // example combo
-            { combo: 'google', do: `vars.App.openURL('google')` }
+            { combo: 'dim', do: `vars.App.openURL('dim')` },
+            { combo: 'enable', do: `vars.App.showOtherButtons()` },
+            { combo: 'dark', do: `vars.App.darkenSwitch()` },
+            { combo: 'php', do: `vars.App.openURL('phpmyadmin')` },
+            { combo: 'plesk', do: `vars.App.openURL('plesk')` },
+            { combo: 'scotia', do: `vars.App.openURL('scotia')` },
+            { combo: 'uni', do: `vars.App.openURL('unicode')` },
+            { combo: 'errgw', do: `vars.App.openURL('errgw')` },
+            { combo: '???', do: `vars.App.showAIChat()` }
         ],
         comboLoad: [],
 
@@ -306,7 +417,15 @@ var vars = {
                 };
                 
                 iV.combo = comboI>-1 ? e.key : ''; // no combos start with the current combo. clear the combo
+            });
 
+            // add mouse move check for screensaver
+            window.addEventListener('mousemove', (e)=> {
+                let sS = vars.App.screenSaver;
+                if (sS.current===-10) { // the screensaver is currently visible
+                    vars.App.sleep(); // hide the screensaver div
+                };
+                sS.reset(); // reset the timeout
             });
         },
 
@@ -317,10 +436,6 @@ var vars = {
 
         buttonClickMain: (e,url)=> {
             vars.UI.mainPage.class.buttonClickMain(url);
-        },
-
-        buttonClickYTDL: ()=> {
-            vars.UI.ytdlp.downloadClick();
         },
 
         buttonClickOthers: (which)=> {
@@ -334,20 +449,21 @@ var vars = {
         dealWithRightClick: (e)=> {
             e.preventDefault();
             let buttonDiv;
-            if ([...e.target.classList].includes('button')) { // user clicked on the button div
+            if ([...e.target.classList].includes('button')) {
                 buttonDiv = e.target;
-                !buttonDiv.classList.contains('hlMPButton') && buttonDiv.classList.add('hlMPButton');
-            } else { // user clicked on a parent of the button div
+                buttonDiv.classList.add('hlMPButton');
+            } else {
+                debugger;
                 let buttonDiv = null;
                 let c = 0;
                 let parentNode = e.target.parentNode;
                 while (!parentNode.classList.contains('button')) {
                     parentNode = parentNode.parentNode;
                     buttonDiv = parentNode;
-                    if (c>5) break;
+                    if (c===5) break;
                     c++;
                 };
-                !buttonDiv.classList.contains('hlMPButton') && buttonDiv.classList.add('hlMPButton');
+                (c!==5 && !buttonDiv.classList.contains('hlMPButton')) && buttonDiv.classList.add('hlMPButton');
             };
 
             let parent = e.target.parentElement;
@@ -384,7 +500,6 @@ var vars = {
             console.log(`%cInit: UI`,'color: #30ff30');
             let ui = vars.UI;
 
-            ui.ytdlp = new YoutubeDownlaoder();
             ui.diary = new UI('diary');
             ui.smallPopUp = new UI('smallPopUp');
             ui.mainPage = new UI('mainPage');

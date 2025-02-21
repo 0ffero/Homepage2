@@ -50,6 +50,17 @@ let UI_YoutubeVideoList = class {
         this.container.innerHTML = html;
     }
 
+    clickYTRow(fileName) {
+        this.videoLoading = true;
+        let endpoint = 'http://offero04.gw/Apps/ytvideoslist/ytvideos/';
+        this.videoPlayer.src = `${endpoint}/${fileName}`;
+        let crc = vars.App.getPreCalculatedCRC(fileName);
+        this.videoPlayer.crc = crc; // when saving current position, it will be held under its crc
+        this.loadingVars = vars.App.ytWatchingList.find(y=>y.crc===crc) || false;
+
+        this.videoSwitchVisibility(); // show the video player
+    }
+
     mainContainerSwitchVisibility() {
         this.container.className = !this.container.className ? 'hidden' : '';
     }

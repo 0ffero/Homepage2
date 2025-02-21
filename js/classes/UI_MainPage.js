@@ -22,19 +22,19 @@ let UI_MainPage = class {
             {
                 containerName: 'Media',
                 buttons: [
-                    'Youtube','Youtube Downloader','BLANK','BLANK','BLANK','BLANK','IMDB','Hura Watch','YIFY'
+                    'Audio Book Player 2','MV Player','Youtube Downloader','Youtube Videos','Jellyfin','Hura Watch','Youtube','BLANK','Job Admin'
                 ]
             },
             {
                 containerName: 'Other',
                 buttons: [
-                    'Diary','Facebook','Google Mail'
+                    'Diary','Google Mail','Cloch Housing','Patient Access','TSB'
                 ]
             },
             {
                 containerName: 'Search',
                 buttons: [
-                    'Google','Google Images','Google Maps'
+                    'Google','Google Images','Google Maps','IMDB'
                 ]
             },
             {
@@ -46,7 +46,7 @@ let UI_MainPage = class {
             { 
                 containerName: 'Downloads',
                 buttons: [
-                    'Fitgirl','MagnetDL','BLANK','DODI','1337x','RarBG'
+                    'Torrent Day','My Anonymouse','Fitgirl','MagnetDL','BLANK','DODI','1337x','RarBG','YIFY'
                 ]
             }
         ];
@@ -67,7 +67,7 @@ let UI_MainPage = class {
         if (!url || !url.startsWith('http')) return;
 
         if (this.comboLoad.includes(url)) { // we've found the url in the combo list
-            if (!deleteIfFound) return; // should we delete it? (default is YES)
+            if (!deleteIfFound) return; // should we delete it? (default is NO)
 
             // yes, remove it from the array
             let i = this.comboLoad.findIndex(cL=>cL===url);
@@ -107,7 +107,7 @@ let UI_MainPage = class {
         this.vpnRequired = false;
 
         // unhighlight comboloads
-        this.comboLoadsUIReset();
+        vars.UI.mainPage.class.comboLoadsUIReset();
     }
 
     comboLoadsUIReset() {
@@ -143,7 +143,11 @@ let UI_MainPage = class {
                         break;
 
                         case 'Youtube Downloader':
-                            js = `onclick="vars.UI.ytdlp.showContainer()"`;
+                            js = `onclick="vars.App.showYTDLP()"`;
+                        break;
+
+                        case 'Youtube Videos':
+                            js = `onclick="vars.UI.youtubeVideoList.class.mainContainerSwitchVisibility()"`;
                         break;
 
                         default: // unknown button!
@@ -164,9 +168,9 @@ let UI_MainPage = class {
 
 
             html += `<div data-url="${url}" class="buttonContainer" ${js}>
-                        <div class="button" style="background-image: url('./assets/images/buttons/${image}');">
+                        <div class="button">
                             <div class="buttonImage">
-                                &nbsp;
+                                <img src="./assets/images/buttons/${image}"></img>
                             </div>
                             <div class="buttonText">${text}</div>
                         </div>

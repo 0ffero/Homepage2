@@ -12,24 +12,65 @@ div {
     display: flex;
 }
 
-.buttonText {
-    background-color: white;
-}
-
 .hidden {
-    display: none !important;
+    display: none;
 }
 
 .clickable {
     cursor: pointer;
 }
 
+
+
+#aiChat {
+    height: 100%;
+    width: 100vw;
+}
+
+#AIChatContainer {
+    transition: 333ms;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    transform: translateX(-100vw);
+    width: 100vw;
+    z-index: 15;
+}
+
+.AIChatContainerShow {
+    transform: translateX(0) !important;
+}
+
+#closeChat {
+    background: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+    position: absolute;
+    top: 20px;
+}
+#closeChat:hover {
+    background: #0056b3;
+}
+
+
 .copyIcon {
     cursor: pointer;
 }
 
 #darkenContainer {
-    transition: 1000ms;
+    transition: 750ms;
 
     opacity: 0;
     background-color: #000000f0;
@@ -42,6 +83,8 @@ div {
 }
 
 .dC_show {
+    transition: 333ms;
+
     opacity: 1 !important;
     z-index: 10 !important;
 }
@@ -73,20 +116,13 @@ div {
     transition: 333ms;
 
     align-items: center;
-    background-color: #fffffd;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 75%;
+    background-color: #ffffff;
     border: 6px solid #147ea7;
     border-radius: 30px;
     color: #1c1c1c;
     display: flex;
     flex-direction: column;
-    font-size: 20px;
     font-weight: bold;
-    height: 200px;
-    justify-content: flex-end;
     margin: 20px;
     padding: 10px;
     width: 200px;
@@ -95,6 +131,11 @@ div {
 .button:hover {
     scale: 1.1;
     transform: perspective( 600px ) rotateY( 33deg );
+}
+
+.button_dark {
+    background-color: #242424 !important;
+    color: #bbbbbb !important;
 }
 
 
@@ -110,6 +151,53 @@ div {
     color: #30ff30 !important;
 }
 
+#closeYTDLP {
+    transition: 333ms;
+
+    color: #d74802;
+    cursor: pointer;
+    font-size: 18px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+#closeYTDLP:hover {
+    transition: 333ms;
+
+    color: red;
+    scale: 1.25;
+}
+
+#newYTDLContainer {
+    transition: 333ms;
+
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    offset: 0;
+    opacity: 0;
+    overflow-y: hidden;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    z-index: -10;
+}
+
+.newYTDLContainerShow {
+    transition: 333ms;
+
+    opacity: 1 !important;
+    z-index: 9 !important;
+}
+
+#nYTDLIFrame {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
 
 #showDiaryContainer {
     flex-direction: column;

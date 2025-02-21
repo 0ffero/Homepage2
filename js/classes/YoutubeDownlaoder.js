@@ -54,6 +54,7 @@ let YoutubeDownlaoder = class {
                 <i onclick="vars.UI.ytdlp.editFileName('music','${m}')" class="ytEditIcon fa-solid fa-pen-to-square"></i>
                 <div class="musicFile">${m}</div>
             </div>`;
+        this.musicListContainer.innerHTML==='No Music Files Found' && (this.musicListContainer.innerHTML='');
         this.musicListContainer.innerHTML += musicHTML;
     }
 
@@ -65,6 +66,7 @@ let YoutubeDownlaoder = class {
                 <i onclick="vars.UI.ytdlp.editFileName('video','${v}')" class="ytEditIcon fa-solid fa-pen-to-square"></i>
                 <div class="videoFile">${v}</div>
             </div>`;
+        this.videoListContainer.innerHTML==='No Video Files Found' && (this.videoListContainer.innerHTML='');
         this.videoListContainer.innerHTML += videoHTML;
     }
 

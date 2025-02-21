@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Homepage 2.0 for Alex</title>
+    <title>Homepage 2.0</title>
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="assets/css/mainDarkMode.css">
     <link rel="stylesheet" href="assets/css/diaryDarkMode.css">
     <link rel="stylesheet" href="assets/css/otherButtons.css">
     <link rel="stylesheet" href="assets/css/timer.css">
     <link rel="stylesheet" href="assets/css/youtubeVideoList.css">
-    <link rel="stylesheet" href="assets/css/ytdlp.css">
     
     <link rel="stylesheet" href="assets/font/roboto.css">
     <script src="assets/font/d40a0f0b1f.js"></script>
@@ -25,10 +24,10 @@
     <script src="./js/classes/UI.js"></script>
     <script src="./js/classes/UI_diary.js"></script>
     <script src="./js/classes/UI_MainPage.js"></script>
+    <script src="./js/classes/UI_OtherButtons.js"></script>
     <script src="./js/classes/UI_SmallPopUp.js"></script>
     <script src="./js/classes/UI_YoutubeVideoList.js"></script>
     <script src="./js/classes/Timer.js"></script>
-    <script src="./js/classes/YoutubeDownlaoder.js"></script>
 </head>
 <body>
     <div id="mainPageContainer">
@@ -126,5 +125,24 @@
         <video id="videoPlayer" autoplay controls ></video>
     </div>
 
+    <div id="newYTDLContainer" class="">
+        <div id="closeYTDLP" onclick="vars.App.showYTDLP()"><i class="fa-solid fa-rectangle-xmark"></i></div>
+        <iframe id="nYTDLIFrame" src="../../Apps/yt-dlp-interface/"></iframe>
+    </div>
+
+    <div id="AIChatContainer">
+        <div id="closeChat" onclick="vars.App.showAIChat(false)">CLOSE CHAT</div>
+        <iframe src="../../DEMOS/puter" frameborder="0" id="aiChat"></iframe>
+    </div>
+
 </body>
+<script type="text/javascript">
+    window.addEventListener('beforeunload',(e)=> {
+        let tC = vars.App.timerClass;
+        if (tC.startTime!==undefined || tC.endTime!==undefined) {
+            event.preventDefault();
+            event.returnValue = '';
+        }
+    });
+</script>
 </html>

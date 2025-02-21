@@ -17,9 +17,12 @@ if (!$ip) {
     cleanExit($op);
 };
 
+$re = '/ip_addr: (.*)/';
+preg_match_all($re, $ip, $matches, PREG_SET_ORDER, 0);
+
 
 $op['valid'] = true;
-$op['currentip'] = $ip;
+$op['currentip'] = $matches[0][1];
 $op['messages'][] = 'Got IP successfully';
 
 cleanExit($op);

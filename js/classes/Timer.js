@@ -222,6 +222,11 @@ let Timer = class {
             return;
         };
 
+        if (deltaSeconds<=5 && vars.App.screenSaver.current===-10) { // screensaver is visible and timer has less than 5s left, hide it
+            vars.App.screenSaver.reset();
+            vars.App.sleep();
+        };
+
         // update the UI
         this.updateCountDownDiv(HMS);
 
@@ -257,9 +262,23 @@ let Timer = class {
             date = date.join(' ');
             this.currentDate = date;
         };
-        
         let time = lS[1];
         this.currentTimeContainer.innerHTML = `${this.currentDate} - ${time}`;
+
+        // our last test is an alert to show up when Im going to bed (at 2am)
+        // Note: Im converting the time to a string then coverting it to a number
+        // so, 20000 is actually 2am (53000 is 5:30am and 144500 is 2:45pm)
+        let lastAlertDate = vars.localStorage.getLastAlertDate();
+        let dateNow = lS[0].split('/').reverse().join('')*1;
+        if (lastAlertDate<dateNow && !vars.App.endOfDayMsgShown) {
+            let t = lS[1].split(':').join('')*1;
+            if (t>20000 && t<43000) {
+                vars.App.endOfDayMsgShown=true;
+                alert(vars.App.endOfDayMsg);
+                vars.localStorage.saveLastAlertDate(dateNow);
+            };
+        };
+
         setTimeout(()=> {
             this.updateCurrentTime();
         },1000);
