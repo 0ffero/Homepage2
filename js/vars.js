@@ -290,7 +290,12 @@ var vars = {
 
         showAIChat: (show=true)=> {
             let div = vars.getElementByID('AIChatContainer');
-            div.className = show ? 'AIChatContainerShow' : '';
+            if (show) {
+                vars.getElementByID('aiChat').src="../../DEMOS/puter";
+                div.className = 'AIChatContainerShow';
+            } else {
+                div.className = '';
+            };
         },
 
         showDiaryIfNotSeen: ()=> {
