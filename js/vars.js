@@ -106,6 +106,11 @@ var vars = {
     },
 
     init: ()=> {
+        // start the dust class
+        const canvas = vars.getElementByID('dustCanvas');
+        const particleSystem = new DustClass(canvas);
+        particleSystem.animate();
+
         vars.App.init();
     },
 
@@ -191,6 +196,8 @@ var vars = {
 
             let h = new Date().getHours();
             if (h>=20 || h<8) { vars.App.darkenSwitch() };
+
+            vars.App.getClockChanges(); // get the clock changes for the year TODO: when the diary page has been built, go in and edit the notes to show the clock changes
         },
 
         checkForVPN: ()=> {
@@ -215,6 +222,33 @@ var vars = {
             event.preventDefault();
             event.cancelBubble=true;
             vars.UI.diary.class.extendDiaryEntry(dateID);
+        },
+
+        getClockChanges: ()=> {
+            let months = [3,10]; // March and October
+            let currentYear = new Date().getFullYear();
+            let clockChanges = { clocksGoBack: '', clocksGoForward: '' };
+            months.forEach((m,i)=> {
+                let date = vars.App.getLastSunday(currentYear,m);
+                !i ? clockChanges.clocksGoForward = date : clockChanges.clocksGoBack = date;
+            });
+            vars.clockChanges = clockChanges;
+        },
+
+        getLastSunday: (year, month)=> { // the month will be 1-12, so we need to remove 1 from the incoming month
+            month--;
+            var date = new Date(year, month, 1);
+            // Find the first Sunday of the month
+            var firstSunday = new Date(date.setDate(date.getDate() + (7 - date.getDay()) % 7));
+            // Find the last Sunday of the month
+            var lastSunday = new Date(firstSunday);
+            while (lastSunday.getMonth() === month) {
+                lastSunday.setDate(lastSunday.getDate() + 7);
+            }
+            lastSunday.setDate(lastSunday.getDate() - 7);
+            // convert it to YYYYMMDD format
+            let d = lastSunday.toLocaleDateString().split('/').reverse().join('')*1;
+            return d;
         },
 
         getPreCalculatedCRC: (fileName)=> {
@@ -256,6 +290,10 @@ var vars = {
 
                 case 'errgw':
                     window.open('http://offero04.gw/errorlog.php','_blank');
+                break;
+
+                case 'spinner':
+                    window.open('http://offero04.io/Apps/randomSpinner','_blank');
                 break;
 
                 default:
@@ -401,7 +439,11 @@ var vars = {
             { combo: 'scotia', do: `vars.App.openURL('scotia')` },
             { combo: 'uni', do: `vars.App.openURL('unicode')` },
             { combo: 'errgw', do: `vars.App.openURL('errgw')` },
-            { combo: '???', do: `vars.App.showAIChat()` }
+            { combo: '???', do: `vars.App.showAIChat()` },
+            { combo: 'rnd', do: `vars.App.openURL('spinner')` },
+            { combo: 'spin', do: `vars.App.openURL('spinner')` },
+            { combo: 'help', do: `vars.UI.switchVisibilityOfComboList()` },
+            { combo: 'show', do: `vars.UI.switchVisibilityOfComboList()` },
         ],
         comboLoad: [],
 
@@ -432,6 +474,21 @@ var vars = {
                 };
                 sS.reset(); // reset the timeout
             });
+
+
+            vars.UI.switchVisibilityOfComboList();
+            let opts = [];
+            vars.input.combos.forEach((i)=> {
+                i.combo!=='enable' && opts.push(i.combo);
+            });
+            // sort the opts array
+            opts.sort();
+            let html='';
+            opts.forEach((o)=> {
+                html+=`<div class="combo">${o}</div>`;
+            });
+            vars.getElementByID('comboList').innerHTML = html;
+
         },
 
         addURLToComboList: (url,deleteIfFound=true)=> {
@@ -526,6 +583,12 @@ var vars = {
             let scale = window.innerWidth/2560;
             let mPC = vars.getElementByID('mainPageContainer')
             mPC.style.zoom=scale;
+        },
+
+        switchVisibilityOfComboList: ()=> {
+            let div = vars.getElementByID('comboList');
+            let className = div.className ? '' : 'hidden';
+            div.className = className;
         },
 
         updateCurrentIP() {

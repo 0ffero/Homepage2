@@ -19,6 +19,7 @@
     <script src="js/consts.js"></script>
     <script defer src="js/vars.js"></script>
 
+    <script src="./js/classes/DustClass.js"></script>
     <script src="./js/classes/HTTPRequest.js"></script>
 
     <script src="./js/classes/UI.js"></script>
@@ -135,6 +136,12 @@
         <iframe frameborder="0" id="aiChat"></iframe>
     </div>
 
+    <div id="comboList">
+        Combo List
+    </div>
+
+    <canvas id="dustCanvas"></canvas>
+
 </body>
 <script type="text/javascript">
     window.addEventListener('beforeunload',(e)=> {
@@ -142,7 +149,19 @@
         if (tC.startTime!==undefined || tC.endTime!==undefined) {
             event.preventDefault();
             event.returnValue = '';
-        }
+        };
     });
+
+    const canvasDust = document.getElementById('dustCanvas');
+    window.addEventListener('resize',()=> {
+        resizeCanvas();
+    });
+
+    const resizeCanvas = ()=> {
+        canvasDust.width = window.innerWidth;
+        canvasDust.height = window.innerHeight;
+    };
+
+    resizeCanvas();
 </script>
 </html>

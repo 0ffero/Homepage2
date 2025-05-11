@@ -125,15 +125,25 @@ while ($virginmedia_date*1<=$endDate*1) {
     };
 };
 
-//NETFLIX
-$netflix_date = "20220617"; $netflix_amount=10.99;
+// GITHUB CoPilot
+$github_date = "20250225"; $github_amount = 8.26;
+while ($github_date*1<=$endDate*1) {
+    $date = strtotime($github_date);
+    $github_date = date("Ymd", strtotime("+1 month", $date));
+    if ($github_date*1>=$startDate*1 && $github_date*1<=$endDate*1) {
+        $moneyArray[$github_date][] = ['type'=>'GitHub CoPilot', 'amount'=>$github_amount, 'deduction'=>true];
+    };
+};
+
+//NETFLIX - no longer subscribed - 20250305
+/* $netflix_date = "20220617"; $netflix_amount=10.99;
 while ($netflix_date*1<=$endDate*1) {
     $date = strtotime($netflix_date);
     $netflix_date = date("Ymd", strtotime("+1 month", $date));
     if ($netflix_date*1>=$startDate*1 && $netflix_date*1<=$endDate*1) {
         $moneyArray[$netflix_date][] = ['type'=>'Netflix', 'amount'=>$netflix_amount, 'deduction'=>true];
     };
-};
+}; */
 
 // OVERDRAFT
 $overdraft_date = "20220601"; $overdraft_amount=8.00;
@@ -150,6 +160,10 @@ $counciltax_date = "20220601"; $counciltax_amount=24.00;
 while ($counciltax_date*1<=$endDate*1) {
     $date = strtotime($counciltax_date);
     $counciltax_date = date("Ymd", strtotime("+1 month", $date));
+    $month = substr($counciltax_date, 4, 2);
+    if ($month*1===2 || $month*1===3) { // we dont pay council tax in Feb or Mar
+        continue;
+    };
     if ($counciltax_date*1>=$startDate*1 && $counciltax_date*1<=$endDate*1) {
         $moneyArray[$counciltax_date][] = ['type'=>'Council Tax', 'amount'=>$counciltax_amount, 'deduction'=>true];
     };

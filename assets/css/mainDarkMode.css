@@ -1,5 +1,5 @@
 body { 
-    background-color: #111111;
+    background-color: #090909; /* FORCE BRAVE BROWSERS BG COLOUR WHILE USING DARK MODE */
     color: #d8dbe0;
     font-family: Roboto;
     font-size: 12px;
@@ -13,7 +13,7 @@ div {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .clickable {
@@ -64,6 +64,20 @@ div {
     background: #0056b3;
 }
 
+#comboList {
+    background-color: #000000EE;
+    border: 1px solid white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    row-gap: 5px;
+    top: 10px;
+    width: 250px;
+}
 
 .copyIcon {
     cursor: pointer;
@@ -89,6 +103,14 @@ div {
     z-index: 10 !important;
 }
 
+#dustCanvas {
+    filter: blur(3px);
+    position: absolute;
+    left: 0;
+    opacity: 0.5;
+    top: 0;
+    z-index: -100;
+}
 
 .error {
     padding: 5px;
